@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saad Raza — Mechanical Engineer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  :root[data-theme="dark"] {
+    --bg-primary: #080c10;
+    --bg-secondary: #0d1117;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(0,212,180,0.4);
+    --text-primary: #f0f4f8;
+    --text-secondary: #8b9ab0;
+    --text-muted: #4a5568;
+    --accent: #00d4b4;
+    --accent-2: #0ea5e9;
+    --accent-3: #f59e0b;
+    --glow: rgba(0,212,180,0.15);
+    --glow-strong: rgba(0,212,180,0.3);
+    --hero-gradient: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,180,0.12) 0%, transparent 70%);
+    --noise-opacity: 0.03;
+    --toggle-bg: rgba(255,255,255,0.08);
+  }
+  :root[data-theme="light"] {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #eef1f6;
+    --bg-card: rgba(255,255,255,0.7);
+    --bg-card-hover: rgba(255,255,255,0.95);
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(0,160,136,0.5);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0097a7;
+    --accent-2: #0369a1;
+    --accent-3: #d97706;
+    --glow: rgba(0,151,167,0.1);
+    --glow-strong: rgba(0,151,167,0.25);
+    --hero-gradient: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,151,167,0.1) 0%, transparent 70%);
+    --noise-opacity: 0.015;
+    --toggle-bg: rgba(0,0,0,0.07);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: var(--noise-opacity);
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    background: rgba(8,12,16,0.6);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.4s;
+  }
+  [data-theme="light"] nav { background: rgba(245,247,250,0.75); }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem; font-weight: 500; letter-spacing: 0.03em;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* Theme Toggle */
+  .theme-toggle {
+    display: flex; align-items: center; gap: 0.6rem;
+    cursor: pointer;
+    background: var(--toggle-bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .toggle-icon { font-size: 1rem; transition: transform 0.4s; }
+  .toggle-icon i,
+  .menu-btn i,
+  .btn-primary i,
+  .btn-secondary i,
+  .skill-icon,
+  .project-icon i,
+  .cert-icon i,
+  .contact-link-icon i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .toggle-label { letter-spacing: 0.04em; }
+
+  /* ---- HERO ---- */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.15fr 0.95fr;
+    align-items: center;
+    gap: 3.5rem;
+    text-align: left;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    background: var(--hero-gradient);
+  }
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+  }
+  .hero-copy .hero-ctas,
+  .hero-copy .hero-stats {
+    justify-content: flex-start;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-hover);
+    border-radius: 100px;
+    padding: 0.4rem 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--accent);
+    margin-bottom: 2rem; letter-spacing: 0.05em;
+    backdrop-filter: blur(10px);
+  }
+  .hero-tag .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  h1.hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+  h1.hero-name span { color: var(--accent); }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    max-width: 520px;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: #080c10;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em;
+    border: none; border-radius: 8px; cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 0 30px var(--glow-strong);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 40px var(--glow-strong); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-weight: 500; font-size: 0.9rem; letter-spacing: 0.03em;
+    border: 1px solid var(--border);
+    border-radius: 8px; cursor: pointer;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* floating orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none; z-index: -1;
+  }
+  .orb-1 { width: 500px; height: 500px; top: -150px; left: -100px; background: rgba(0,212,180,0.07); }
+  .orb-2 { width: 400px; height: 400px; bottom: 0; right: -100px; background: rgba(14,165,233,0.07); }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-image-shell {
+    position: relative;
+    width: min(100%, 470px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    padding: 1rem;
+    background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+    backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+  .hero-image-shell::before,
+  .hero-image-shell::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .hero-image-shell::before {
+    width: 220px; height: 220px;
+    right: -70px; top: -70px;
+    background: rgba(0,212,180,0.18);
+  }
+  .hero-image-shell::after {
+    width: 180px; height: 180px;
+    left: -50px; bottom: -60px;
+    background: rgba(14,165,233,0.16);
+  }
+  .hero-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(180deg, rgba(15,23,42,0.15), rgba(8,12,16,0.8));
+  }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.03);
+  }
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8,12,16,0.08) 0%, rgba(8,12,16,0.45) 100%);
+  }
+  .hero-floating-card {
+    position: absolute;
+    left: -24px;
+    bottom: 28px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    background: rgba(8,12,16,0.78);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.3);
+  }
+  .hero-floating-card strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.1rem;
+  }
+  .hero-floating-card span {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+  .hero-mini-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    color: #081018;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.04);
+  }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 6rem 0; position: relative; z-index: 1; }
+  .section-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800; letter-spacing: -0.03em;
+    color: var(--text-primary); line-height: 1.1;
+  }
+  .section-title span { color: var(--accent); }
+
+  /* divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ---- GLASS CARD ---- */
+  .glass-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .glass-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,212,180,0.08);
+  }
+
+  /* ---- SKILLS ---- */
+  .skills-grid { display: flex; flex-direction: column; gap: 2rem; }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .skill-group-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border);
+  }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .skill-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+    cursor: default;
+    backdrop-filter: blur(10px);
+  }
+  .skill-badge:hover {
+    border-color: var(--border-hover);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--glow);
+  }
+  .skill-icon { font-size: 1.1rem; }
+
+  /* ---- PROJECTS ---- */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+  .project-card { padding: 2rem; }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .project-icon { font-size: 2rem; }
+  .project-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .project-desc {
+    font-size: 0.875rem; color: var(--text-secondary);
+    line-height: 1.7; margin-bottom: 1.25rem;
+    font-weight: 300;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.04em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    background: rgba(0,212,180,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,180,0.2);
+  }
+  [data-theme="light"] .project-tag {
+    background: rgba(0,151,167,0.07);
+    color: var(--accent);
+    border-color: rgba(0,151,167,0.2);
+  }
+
+  /* ---- TIMELINE ---- */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 2rem;
+  }
+  .timeline-dot {
+    position: absolute; left: -2.5rem; top: 0.5rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg-primary);
+    box-shadow: 0 0 0 3px var(--glow-strong);
+    transition: background 0.4s, border-color 0.4s;
+  }
+  .timeline-meta {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 0.6rem; flex-wrap: wrap;
+  }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .timeline-badge {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .badge-intern { background: rgba(14,165,233,0.12); color: var(--accent-2); border: 1px solid rgba(14,165,233,0.2); }
+  .badge-edu { background: rgba(245,158,11,0.12); color: var(--accent-3); border: 1px solid rgba(245,158,11,0.2); }
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 0.2rem;
+    letter-spacing: -0.02em;
+  }
+  .timeline-org { font-size: 0.9rem; color: var(--accent); font-weight: 500; margin-bottom: 0.8rem; }
+  .timeline-points { list-style: none; }
+  .timeline-points li {
+    font-size: 0.875rem; color: var(--text-secondary);
+    line-height: 1.7; padding-left: 1.2rem;
+    position: relative; margin-bottom: 0.4rem;
+    font-weight: 300;
+  }
+  .timeline-points li::before {
+    content: '\f061';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute; left: 0;
+    color: var(--accent); font-size: 0.75rem;
+  }
+
+  /* ---- CERTS ---- */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .cert-card {
+    padding: 1.4rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .cert-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(0,212,180,0.1);
+    border: 1px solid rgba(0,212,180,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .cert-title { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); line-height: 1.4; margin-bottom: 0.25rem; }
+  .cert-issuer { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ---- CONTACT ---- */
+  #contact { background: var(--bg-secondary); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+  .contact-info p {
+    font-size: 1rem; color: var(--text-secondary);
+    line-height: 1.8; margin-bottom: 2rem; font-weight: 300;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon { font-size: 1.2rem; width: 20px; text-align: center; }
+  .contact-link-text { font-size: 0.875rem; }
+
+  /* Contact Form */
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    color: var(--text-muted); text-transform: uppercase;
+  }
+  .form-input, .form-textarea {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+    backdrop-filter: blur(10px);
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow);
+  }
+  .form-textarea { min-height: 120px; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ---- SCROLL REVEAL ---- */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---- MOBILE NAV ---- */
+  .menu-btn { display: none; background: none; border: none; cursor: pointer; color: var(--text-primary); font-size: 1.4rem; }
+  
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--bg-secondary); padding: 1.5rem; gap: 1.2rem; border-bottom: 1px solid var(--border); z-index: 99; }
+    .menu-btn { display: block; }
+    .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    #hero {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 7.5rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+    .hero-copy,
+    .hero-copy .hero-ctas,
+    .hero-copy .hero-stats {
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-copy { max-width: 100%; }
+    .hero-visual { order: -1; }
+    .hero-image-shell { width: min(100%, 360px); }
+    .hero-floating-card { left: 14px; right: 14px; bottom: 14px; }
+    h1.hero-name { font-size: clamp(2.8rem, 12vw, 5rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">PORTFOLIO.</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <div class="theme-toggle" id="themeToggle">
+      <span class="toggle-icon" id="toggleIcon"><i class="fa-solid fa-sun"></i></span>
+      <span class="toggle-label" id="toggleLabel">Light</span>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-copy">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Available for Opportunities — 2026
+    </div>
+    <h1 class="hero-name">Saad<br><span>Raza.</span></h1>
+    <p class="hero-title">Mechanical Engineer · Thermal Systems · Manufacturing</p>
+    <p class="hero-desc">Final-year Mechanical Engineering student with industrial exposure to steam-turbine systems, plant utilities, rotating equipment, and heavy manufacturing operations.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Let's Connect</a>
+      <a href="#projects" class="btn-secondary">View Projects <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">3.97</div>
+        <div class="hero-stat-label">GPA / 4.0</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">2×</div>
+        <div class="hero-stat-label">Internships</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">6+</div>
+        <div class="hero-stat-label">Projects Led</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">5</div>
+        <div class="hero-stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual" ">
+    <div class="hero-image-shell">
+      <div class="hero-image">
+        <img alt="Saad Raza portrait illustration" src="IMG-20260430-WA0010.jpg.jpeg" >
+      </div>
+      <div class="hero-image-overlay"></div>
+      <div class="hero-floating-card">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">// 01 — Technical Arsenal</p>
+      <h2 class="section-title">Skills &amp; <span>Tools</span></h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="reveal">
+        <p class="skill-group-title">Simulation &amp; Design</p>
+        <div class="skills-row">
+          <span class="skill-badge"><i class="fa-solid fa-wind skill-icon"></i>ANSYS Fluent (CFD)</span>
+          <span class="skill-badge"><i class="fa-solid fa-flask-vial skill-icon"></i>ANSYS Workbench</span>
+          <span class="skill-badge"><i class="fa-solid fa-gears skill-icon"></i>SolidWorks</span>
+          <span class="skill-badge"><i class="fa-solid fa-compass-drafting skill-icon"></i>AutoCAD</span>
+          <span class="skill-badge"><i class="fa-solid fa-table-cells skill-icon"></i>Microsoft Excel</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="skill-group-title">Thermal &amp; Mechanical Systems</p>
+        <div class="skills-row">
+          <span class="skill-badge"><i class="fa-solid fa-fire-flame-curved skill-icon"></i>Thermodynamics</span>
+          <span class="skill-badge"><i class="fa-solid fa-droplet skill-icon"></i>Fluid Mechanics</span>
+          <span class="skill-badge"><i class="fa-solid fa-temperature-half skill-icon"></i>Heat &amp; Mass Transfer</span>
+          <span class="skill-badge"><i class="fa-solid fa-industry skill-icon"></i>Boiler &amp; Steam Systems</span>
+          <span class="skill-badge"><i class="fa-solid fa-snowflake skill-icon"></i>Chillers &amp; HVAC</span>
+          <span class="skill-badge"><i class="fa-solid fa-right-left skill-icon"></i>Heat Exchangers</span>
+          <span class="skill-badge"><i class="fa-solid fa-bolt skill-icon"></i>Cogeneration</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="skill-group-title">HSE &amp; Compliance</p>
+        <div class="skills-row">
+          <span class="skill-badge"><i class="fa-solid fa-helmet-safety skill-icon"></i>OSHA Standards</span>
+          <span class="skill-badge"><i class="fa-solid fa-clipboard-check skill-icon"></i>NEBOSH Awareness</span>
+          <span class="skill-badge"><i class="fa-solid fa-shield-halved skill-icon"></i>EHS Compliance</span>
+          <span class="skill-badge"><i class="fa-solid fa-triangle-exclamation skill-icon"></i>Risk Assessment</span>
+          <span class="skill-badge"><i class="fa-solid fa-magnifying-glass skill-icon"></i>Hazard Identification</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="skill-group-title">Soft Skills &amp; Leadership</p>
+        <div class="skills-row">
+          <span class="skill-badge"><i class="fa-solid fa-people-group skill-icon"></i>Team Leadership</span>
+          <span class="skill-badge"><i class="fa-solid fa-puzzle-piece skill-icon"></i>Problem Solving</span>
+          <span class="skill-badge"><i class="fa-solid fa-pen-to-square skill-icon"></i>Technical Report Writing</span>
+          <span class="skill-badge"><i class="fa-solid fa-folder-open skill-icon"></i>Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">// 02 — Selected Work</p>
+      <h2 class="section-title">Featured <span>Projects</span></h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="glass-card project-card reveal">
+        <div class="project-header">
+          <span class="project-icon"><i class="fa-solid fa-sun"></i></span>
+          <span class="project-year">Oct 2025 – Present</span>
+        </div>
+        <h3 class="project-title">CFD-Based Thermal Performance Analysis — Flat Plate Solar Collector</h3>
+        <p class="project-desc">Final Year Project as Group Leader at QUEST University. Designed 3 absorber tube geometries, conducted steady-state CFD simulations with full mesh validation to improve maximum thermal efficiency.</p>
+        <div class="project-tags">
+          <span class="project-tag">ANSYS Fluent</span>
+          <span class="project-tag">CFD</span>
+          <span class="project-tag">Heat Transfer</span>
+          <span class="project-tag">Mesh Validation</span>
+          <span class="project-tag">FYP</span>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal">
+        <div class="project-header">
+          <span class="project-icon"><i class="fa-solid fa-gears"></i></span>
+          <span class="project-year">May – Aug 2025</span>
+        </div>
+        <h3 class="project-title">Design &amp; Fabrication of Sheet Metal Grinding-Cutting Machine</h3>
+        <p class="project-desc">Group Leader at QUEST University. Designed complete mechanical assembly in SolidWorks with material selection based on strength, then fabricated a working prototype through functional performance testing and quality inspection.</p>
+        <div class="project-tags">
+          <span class="project-tag">SolidWorks</span>
+          <span class="project-tag">Manufacturing</span>
+          <span class="project-tag">Prototyping</span>
+          <span class="project-tag">QA/QC</span>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal">
+        <div class="project-header">
+          <span class="project-icon"><i class="fa-solid fa-ship"></i></span>
+          <span class="project-year">Jun – Jul 2025</span>
+        </div>
+        <h3 class="project-title">Marine &amp; Industrial Engineering — KS&amp;EW Internship</h3>
+        <p class="project-desc">Applied foundational engineering concepts across General Construction, Welding, and Machine Shops with exposure to active marine projects including a submarine construction project, with strict daily PPE compliance.</p>
+        <div class="project-tags">
+          <span class="project-tag">Marine Engineering</span>
+          <span class="project-tag">Welding</span>
+          <span class="project-tag">Manufacturing</span>
+          <span class="project-tag">Inventory Mgmt</span>
+        </div>
+      </div>
+
+      <div class="glass-card project-card reveal">
+        <div class="project-header">
+          <span class="project-icon"><i class="fa-solid fa-industry"></i></span>
+          <span class="project-year">Dec 2024 – Jan 2025</span>
+        </div>
+        <h3 class="project-title">Sugar Manufacturing Plant Operations — Habib Sugar Mills</h3>
+        <p class="project-desc">Rotated across all four production units (Mill, Boiler, Process, Power Houses) gaining end-to-end exposure to the complete sugar manufacturing process, steam generation, and feed water management.</p>
+        <div class="project-tags">
+          <span class="project-tag">Boiler Systems</span>
+          <span class="project-tag">Steam Turbines</span>
+          <span class="project-tag">Plant Utilities</span>
+          <span class="project-tag">Bagasse Fuel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- EXPERIENCE & EDUCATION -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">// 03 — Journey</p>
+      <h2 class="section-title">Experience &amp; <span>Education</span></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="timeline-meta">
+          <span class="timeline-date">Jun 2025 – Jul 2025</span>
+          <span class="timeline-badge badge-intern">Internship</span>
+        </div>
+        <h3 class="timeline-role">Mechanical Engineering Intern</h3>
+        <p class="timeline-org">Karachi Shipyard &amp; Engineering Works Ltd (KS&amp;EW) — Karachi, Pakistan</p>
+        <ul class="timeline-points">
+          <li>Completed internship across three departments: General Construction (CN), Welding, and Machine Shops with exposure to active industrial and marine projects including a submarine construction project.</li>
+          <li>Applied foundational engineering concepts including strength of materials, manufacturing, and inventory management within a large-scale, multi-disciplinary industry with strict daily PPE compliance.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="timeline-meta">
+          <span class="timeline-date">Dec 2024 – Jan 2025</span>
+          <span class="timeline-badge badge-intern">Internship</span>
+        </div>
+        <h3 class="timeline-role">Maintenance Engineering Intern</h3>
+        <p class="timeline-org">Habib Sugar Mills Ltd — Nawabshah, Pakistan</p>
+        <ul class="timeline-points">
+          <li>Rotated across all four production units — Mill, Boiler, Process, and Power Houses — gaining end-to-end exposure to the complete sugar manufacturing process from raw cane juice extraction to final product.</li>
+          <li>Studied operation of four water tube boilers running 24/7 on bagasse fuel, observing steam generation, temperature &amp; pressure monitoring, feed water management, and waste clearance procedures.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="timeline-meta">
+          <span class="timeline-date">Oct 2022 – Aug 2026</span>
+          <span class="timeline-badge badge-edu">Education</span>
+        </div>
+        <h3 class="timeline-role">Bachelor of Engineering — Mechanical Engineering</h3>
+        <p class="timeline-org">Quaid-e-Awam University of Engineering, Science &amp; Technology (QUEST) — GPA: 3.97 / 4.0</p>
+        <ul class="timeline-points">
+          <li>Core Modules: Thermodynamics, Heat &amp; Mass Transfer, Fluid Mechanics, Manufacturing Processes, Machine Design.</li>
+          <li>Vice Chancellor's Academic Cash Prize (Rank: 2nd) | PM Youth Laptop Scheme – Top Performer (2024).</li>
+          <li>Active member of ASME QUEST Chapter; group leader for 6+ multidisciplinary academic projects.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <span class="timeline-dot"></span>
+        <div class="timeline-meta">
+          <span class="timeline-date">Aug 2020 – Jul 2022</span>
+          <span class="timeline-badge badge-edu">Education</span>
+        </div>
+        <h3 class="timeline-role">Intermediate — Pre-Engineering</h3>
+        <p class="timeline-org">Government Degree College, Nawabshah — 84.36%</p>
+        <ul class="timeline-points">
+          <li>Completed Intermediate in Pre-Engineering with distinction, building a strong foundation in Mathematics, Physics, and Chemistry.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">// 04 — Credentials</p>
+      <h2 class="section-title">Certifi<span>cations</span></h2>
+    </div>
+    <div class="certs-grid">
+      <div class="glass-card cert-card reveal">
+        <div class="cert-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div>
+          <p class="cert-title">NEBOSH Certificate: Slips and Falls</p>
+          <p class="cert-issuer">NEBOSH · Dec 2025</p>
+        </div>
+      </div>
+      <div class="glass-card cert-card reveal">
+        <div class="cert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div>
+          <p class="cert-title">Introduction to OSHA: Safety Standards &amp; Compliance</p>
+          <p class="cert-issuer">Coursera · Aug 2025</p>
+        </div>
+      </div>
+      <div class="glass-card cert-card reveal">
+        <div class="cert-icon"><i class="fa-solid fa-wind"></i></div>
+        <div>
+          <p class="cert-title">Innovate with ANSYS Simulation Tools</p>
+          <p class="cert-issuer">Coursera · Jul 2025</p>
+        </div>
+      </div>
+      <div class="glass-card cert-card reveal">
+        <div class="cert-icon"><i class="fa-solid fa-gears"></i></div>
+        <div>
+          <p class="cert-title">SolidWorks Advanced Sketching &amp; Reference Geometry</p>
+          <p class="cert-issuer">Dassault Systèmes · Jul 2025</p>
+        </div>
+      </div>
+      <div class="glass-card cert-card reveal">
+        <div class="cert-icon"><i class="fa-solid fa-table-cells"></i></div>
+        <div>
+          <p class="cert-title">Work Smarter with Microsoft Excel</p>
+          <p class="cert-issuer">Microsoft · Jul 2025</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-layout">
+      <div>
+        <div class="section-header reveal">
+          <p class="section-eyebrow">// 05 — Get In Touch</p>
+          <h2 class="section-title">Let's <span>Talk</span></h2>
+        </div>
+        <p class="reveal" style="font-size:1rem;color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-weight:300;">Whether you're looking for an engineering intern, a collaborator on a thermal systems project, or just want to connect — my inbox is always open.</p>
+        <div class="contact-links reveal">
+          <a href="mailto:saadrazamalik03@gmail.com" class="glass-card contact-link">
+            <span class="contact-link-icon"><i class="fa-solid fa-envelope"></i></span>
+            <span class="contact-link-text">saadrazamalik03@gmail.com</span>
+          </a>
+          <a href="tel:+923482625345" class="glass-card contact-link">
+            <span class="contact-link-icon"><i class="fa-solid fa-phone"></i></span>
+            <span class="contact-link-text">+92 348 2625345</span>
+          </a>
+          <a href="#" class="glass-card contact-link">
+            <span class="contact-link-icon"><i class="fa-brands fa-linkedin"></i></span>
+            <span class="contact-link-text">LinkedIn Profile</span>
+          </a>
+          <div class="glass-card contact-link" style="cursor:default;">
+            <span class="contact-link-icon"><i class="fa-solid fa-location-dot"></i></span>
+            <span class="contact-link-text">Nawabshah, Pakistan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <form class="contact-form glass-card" style="padding:2rem;" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" placeholder="John" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" placeholder="Doe">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="john@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-input" placeholder="Job Opportunity / Collaboration">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell me about the opportunity or project..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="submitBtn">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+          <p id="formMsg" style="display:none;text-align:center;color:var(--accent);font-size:0.85rem;margin-top:0.5rem;">✓ Message sent! I'll get back to you soon.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- <footer>
+  <p>Designed &amp; Built with ♥ by <span>Saad Raza</span> · Nawabshah, Pakistan · 2026</p>
+</footer> -->
+
+<script>
+  // Theme Toggle
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('toggleIcon');
+  const label = document.getElementById('toggleLabel');
+  const html = document.documentElement;
+
+  toggle.addEventListener('click', () => {
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    icon.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    label.textContent = isDark ? 'Light' : 'Dark';
+  });
+
+  // Mobile Menu
+  document.getElementById('menuBtn').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Close menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // Scroll Reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // Staggered reveals within same parent
+  document.querySelectorAll('.projects-grid, .certs-grid, .skills-row').forEach(grid => {
+    const children = grid.querySelectorAll('.reveal, .skill-badge');
+    children.forEach((child, i) => {
+      if (!child.style.transitionDelay) {
+        child.style.transitionDelay = `${i * 60}ms`;
+      }
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 50 ? '0 8px 40px rgba(0,0,0,0.2)' : 'none';
+  });
+
+  // Hero name animation on load
+  window.addEventListener('load', () => {
+    if (window.gsap) {
+      gsap.set(['#navbar', '#hero .hero-copy > *', '#hero .hero-image-shell', '#hero .hero-floating-card'], {
+        opacity: 0
+      });
+      gsap.set('#hero .hero-copy > *', { y: 24 });
+      gsap.set('#hero .hero-image-shell', { x: 36, scale: 0.96, rotation: 1.5 });
+      gsap.set('#hero .hero-floating-card', { y: 18 });
+
+      const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      intro.to('#navbar', { opacity: 1, duration: 0.45 })
+        .to('#hero .hero-copy > *', {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.12
+        }, 0.08)
+        .to('#hero .hero-image-shell', {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 1.05
+        }, 0.18)
+        .to('#hero .hero-floating-card', {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: 'power2.out'
+        }, 1.0);
+    }
+  });
+
+  // Contact form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('formMsg');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.style.display = 'none';
+      msg.style.display = 'block';
+      e.target.reset();
+    }, 1200);
+  }
+</script>
+</body>
+</html>
